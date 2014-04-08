@@ -4,7 +4,7 @@
 ## To do this, use a special function containing 4 sub-functions.
 
 ## "makeCacheMatrix": This function contains 4 sub-functions in it.
-## Why use this this complicating function? To hold the calculation results in memory without noticing it.
+## Why use this complicating function? To hold the calculation results in memory without noticing it.
 
 makeCacheMatrix <- function(x = matrix()) {
         m <- NULL
@@ -20,7 +20,7 @@ makeCacheMatrix <- function(x = matrix()) {
              getmean = getmean)
 }
 
-## Cacalute the the inverse of of a matrix .
+## Cacalute the inverse of of a matrix .
 ## If it was already calculated and cashed,  then the cached results are simply returned.
 
 cacheSolve <- function(x, ...) {
@@ -36,7 +36,7 @@ cacheSolve <- function(x, ...) {
         m
 }
 
-## Example using sample matrix:
+## An example how to use the functions
 matrix.1 <- c(0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0) 
 matrix.1 <- matrix(matrix.1, ncol=5, byrow=TRUE) 
 fx.inverse <- makeCacheMatrix(matrix.1)
