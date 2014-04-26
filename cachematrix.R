@@ -5,8 +5,8 @@
 ## To do this, use a special function containing 4 sub-functions.
 
 ## "makeCacheMatrix": This function contains 4 sub-functions in it.
-## Why use this complicating function? To hold the calculation results in memory without noticing it.
-
+## Why use this complicating function?
+## -> To hold the calculation results in memory without noticing it.
 makeCacheMatrix <- function(x = matrix()) {
         m <- NULL
         # set <- function(y) {
@@ -30,7 +30,6 @@ makeCacheMatrix <- function(x = matrix()) {
 
 ## Cacalute the inverse of of a matrix .
 ## If it was already calculated and cashed,  then the cached results are simply returned.
-
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
         m <- x$getInverse()  # get the cashed data
