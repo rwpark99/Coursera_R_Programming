@@ -1,4 +1,4 @@
-## ver 0.2
+## ver 0.5
 ## Calculate Inverse of a Matrix using cache.
 ## If cached Inverse of a Matrix exists in the memory, then display it.
 ## Or, there is no one, calculate it.
@@ -38,7 +38,7 @@ cacheSolve <- function(x, ...) {
             return(m)
         }
         data <- x$get()      # If there is no cashed data, then use the new data
-        m <- solve(data, ...)
+        m <- solve(data, ...)# Calculate 'Inverse of a Matrix'
         x$setInverse(m)      # Cashe the solved matrix into memory.
         m
 }
@@ -49,5 +49,7 @@ matrix.1 <- matrix(matrix.1, ncol=5, byrow=TRUE)
 
 fx.inverse <- makeCacheMatrix(matrix.1)
 matrix.1                          #original matrix
-cacheSolve(fx.inverse)            #solved matrix   
-matrix.1%*%cacheSolve(fx.inverse) #check whether the solved matrix is correct (diagnonal matrix).
+cacheSolve(fx.inverse)            #New solved matrix (You will not see any message except solved matrix)
+cacheSolve(fx.inverse)            #CASHED solved matrix. You wil see "getting cached data".  
+matrix.1%*%cacheSolve(fx.inverse) #check whether the solved matrix is correct 
+                                  #(If you see diagnonal matrix, then it's correct!).
