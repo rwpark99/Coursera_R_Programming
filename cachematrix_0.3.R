@@ -9,6 +9,7 @@
 
 makeCacheMatrix <- function(x = matrix()) {
         m <- NULL
+        y <- NULL
         # set <- function(y) {
         #        x <<- y
         #        #m <<- NULL
@@ -16,11 +17,15 @@ makeCacheMatrix <- function(x = matrix()) {
         get <- function() {
           x
         }
-        setInverse <- function(Inverse) {
-          m <<- Inverse
+        setInverse <- function(x, Inverse) {
+          y <<- x
+          m <<- Inverse          
         }
         getInverse <- function() {
           m
+        }
+        getOriginal <- function() {
+          y
         }  
         list(#set = set, 
              get = get, 
@@ -34,21 +39,25 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
         m <- x$getInverse()  # get the cashed data
-        if(!is.null(m)) {    # If cashed, 
+        y <- x$getOriginal()  # get the original matrix
+        if(!is.null(m) && y == x) {    # If cashed and not changed, 
             message("getting cached data")
             return(m)
         }
         data <- x$get()      # If there is no cashed data, then use the new data
         m <- solve(data, ...)
-        x$setInverse(m)      # Cashe the solved matrix into memory.
+        x$setInverse(m, x)      # Cashe the solved matrix into memory.
         m
 }
 
 ## An example how to use the functions
 matrix.1 <- c(0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0) 
 matrix.1 <- matrix(matrix.1, ncol=5, byrow=TRUE) 
-
 fx.inverse <- makeCacheMatrix(matrix.1)
 matrix.1                          #original matrix
 cacheSolve(fx.inverse)            #solved matrix   
 matrix.1%*%cacheSolve(fx.inverse) #check whether the solved matrix is correct (diagnonal matrix).
+
+
+matrix.1 <- c(0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0) 
+matrix.1 <- matrix(matrix.1, ncol=5, byrow=TRUE) 
